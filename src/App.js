@@ -13,10 +13,9 @@ function getRandomInt(max) {
 
 
 class App extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
   }
-
 
   state = {
     arrOne: [],
@@ -38,9 +37,9 @@ class App extends Component {
     const stateName = e.target.name
     let index = getRandomInt(99)
     const param = this.state.arrParent.find((e, i) => i === index)
-    const arr = { arrOne: [...this.state[stateName], param] }
-    this.setState({ ...this.state, ...arr })
+    this.setState({ ...this.state, [stateName]: [...this.state[stateName], param] })
     const newArrParent = this.state.arrParent.filter((e, i) => i !== index)
+    this.setState({ arrParent: newArrParent })
   }
 
 
