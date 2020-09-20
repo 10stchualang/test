@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 let arrParent = []
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 1000; i++) {
   arrParent.push(`${i}/`)
 
 }
@@ -13,7 +13,7 @@ function getRandomInt(max) {
 
 
 class App extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
 
@@ -40,22 +40,32 @@ class App extends Component {
     this.setState({ ...this.state, [stateName]: [...this.state[stateName], param] })
     const newArrParent = this.state.arrParent.filter((e, i) => i !== index)
     this.setState({ arrParent: newArrParent })
+    if (!param && this.state.arrParent.length != 0) {
+      this.onClick(e)
+    }
   }
 
+  onClick2 = (e) => {
+    const stateName = e.target.name
+    let rand = this.state.arrParent[Math.floor(Math.random() * this.state.arrParent.length)];
+    this.state[stateName].push(rand)
+    const newArrParent = this.state.arrParent.filter((e) => e !== rand)
+    this.setState({ arrParent: newArrParent })
+
+  }
 
 
   render() {
     return (<div>
       <p>{this.state.arrOne}</p>
-      <button style={styles} name="arrOne" onClick={this.onClick} />
+      <button style={styles} name="arrOne" onClick={this.onClick2} />
 
       <p>{this.state.arrTwo}</p>
-      <button style={styles} name="arrTwo" onClick={this.onClick} />
-
+      <button style={styles} name="arrTwo" onClick={this.onClick2} />
 
 
       <p>{this.state.arrThree}</p>
-      <button style={styles} name="arrThree" onClick={this.onClick} />
+      <button style={styles} name="arrThree" onClick={this.onClick2} />
 
 
 
