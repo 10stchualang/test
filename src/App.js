@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 let arrParent = []
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 1000; i++) {
   arrParent.push(`${i}/`)
 
 }
@@ -13,7 +13,7 @@ function getRandomInt(max) {
 
 
 class App extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
 
@@ -24,24 +24,28 @@ class App extends Component {
     arrParent
   }
 
-  getIndexFromParent = (a) => {
+  // getIndexFromParent = (a) => {
 
-    var i = this.state.arrParent.indexOf(`${a}/`);
-    if (i != -1) {
-      this.state.arrParent.splice(i, 1);
-      this.setState({ arrParent })
-    }
-  }
+  //   var i = this.state.arrParent.indexOf(`${a}/`);
+  //   if (i != -1) {
+  //     this.state.arrParent.splice(i, 1);
+  //     this.setState({ arrParent })
+  //   }
+  // }
 
   onClick = (e) => {
     const stateName = e.target.name
-    let index = getRandomInt(99)
+    let index = getRandomInt(999)
     const param = this.state.arrParent.find((e, i) => i === index)
-    this.setState({ ...this.state, [stateName]: [...this.state[stateName], param] })
-    const newArrParent = this.state.arrParent.filter((e, i) => i !== index)
-    this.setState({ arrParent: newArrParent })
+    if (param == null) {
+      this.onClick(e);
+    }
+    else {
+      this.setState({ ...this.state, [stateName]: [...this.state[stateName], param] })
+      const newArrParent = this.state.arrParent.filter((e, i) => i !== index)
+      this.setState({ arrParent: newArrParent })
+    }
   }
-
 
 
   render() {
