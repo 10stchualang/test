@@ -46,20 +46,30 @@ class App extends Component {
       this.setState({ arrParent: newArrParent })
     }
   }
+  getValue = (e) => {
+    const stateName = e.target.name
+    let tmp = this.state.arrParent[Math.floor(Math.random() * this.state.arrParent.length)];
+    this.state[stateName].push(tmp)
+    const newArrParent = this.state.arrParent.filter((e) => e !== tmp)
+    this.setState({ arrParent: newArrParent })
+
+  }
 
 
   render() {
     return (<div>
       <p>{this.state.arrOne}</p>
       <button style={styles} name="arrOne" onClick={this.onClick} />
+      <button style={styles} name="arrOne" onClick={this.getValue} />
 
       <p>{this.state.arrTwo}</p>
       <button style={styles} name="arrTwo" onClick={this.onClick} />
-
-
+      <button style={styles} name="arrTwo" onClick={this.getValue} />
 
       <p>{this.state.arrThree}</p>
       <button style={styles} name="arrThree" onClick={this.onClick} />
+      <button style={styles} name="arrThree" onClick={this.getValue} />
+
 
 
 
